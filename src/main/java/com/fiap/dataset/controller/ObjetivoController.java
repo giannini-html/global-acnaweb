@@ -60,8 +60,15 @@ public class ObjetivoController {
 
 
 	@PostMapping("indicadores")
-	public Indicador createIndicadores(@RequestBody Indicador ind) {
+	public Indicador createIndicadores(@RequestBody IndicadorDTO dto) {
+		
+		Indicador ind= new Indicador();
 
+		// mapeamento
+		ind.setId(dto.getId());
+		ind.setDescricao(dto.getDescricao());
+		ind.setObjetivo(dto.getObjetivo());
+		
 		Indicador result = indicadorService.save(ind);
 		return result;
 	}
