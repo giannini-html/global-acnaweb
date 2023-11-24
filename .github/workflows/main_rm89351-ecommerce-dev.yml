@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy container app to Azure Web App - global-gutstavo-lucas
+name: Build and deploy container app to Azure Web App - rm89351-ecommerce-dev
 
 on:
   push:
@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_240a716821d04109b46587554993b7f3 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_a4032e2cdad84a909c433f00fd640710 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_65de1f7d7b70447e98dd62e6afbe102d }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_011f0e58dff64c2fb62c0a549ef3fcab }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_240a716821d04109b46587554993b7f3 }}/gianninidoc/global:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_65de1f7d7b70447e98dd62e6afbe102d }}/gianninidoc/global:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -45,7 +45,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'global-gutstavo-lucas'
+        app-name: 'rm89351-ecommerce-dev'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_c6337b04d3ca425fa0399e5f7ea6853f }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_240a716821d04109b46587554993b7f3 }}/gianninidoc/global:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7ee24ad5081541b4861bf6e680eceb20 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_65de1f7d7b70447e98dd62e6afbe102d }}/gianninidoc/global:${{ github.sha }}'
